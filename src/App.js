@@ -16,6 +16,31 @@ const CustomLayoutPlugin = {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showUI: true
+    }
+    this.toggleShowUI = this.toggleShowUI.bind(this);
+  }
+
+  toggleShowUI() {
+    this.setState( prevState => ({
+      showUI: !prevState.showUI
+    }));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <button onClick={this.toggleShowUI}>Toggle Show UI</button>
+        { this.state.showUI ? <SwaggerUIComponent /> : <div> UI not rendered </div> }
+      </div>
+    );
+  }
+}
+
+class SwaggerUIComponent extends Component {
   componentDidMount() {
     SwaggerUI({
       dom_id: `#${DOM_ID}`,
